@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: NBA stats backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/nba_stats_db
+    username: postgres
+    password: 2004
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

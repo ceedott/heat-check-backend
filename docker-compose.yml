@@ -1,0 +1,11 @@
+services:
+  db:
+    # docker image of postgres
+    image: postgres:latest
+    # ports to expose to host container
+    ports:
+      - "5432:5432"
+    # restart if we accidentally kill running container or run into problems
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 2004 # specify password to postgres container
