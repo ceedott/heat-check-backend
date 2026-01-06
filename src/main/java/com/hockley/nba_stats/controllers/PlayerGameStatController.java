@@ -23,7 +23,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController()
-@RequestMapping("/stats")
+@RequestMapping("/stats2")
 public class PlayerGameStatController {
     private final PlayerGameStatMapper mapper;
     private final PlayerGameStatService service;

@@ -14,7 +14,7 @@ import java.util.Objects;
                 @Index(name = "idx_team_date", columnList = "team,game_date")
         }
 )
-public class PlayerGameStat { // to be refactored
+public class PlayerGameStat {
     // GAME LOG ENTITY
     // each game log should have
     // id, player name, minutes, pts, reb, ast, fg, fga, fg_per, 3p, 3pa, 3p_per, ft, fta, ft_per, stl, blk, tov, pf

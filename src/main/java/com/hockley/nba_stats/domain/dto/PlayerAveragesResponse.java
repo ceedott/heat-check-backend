@@ -3,25 +3,27 @@ package com.hockley.nba_stats.domain.dto;
 import java.time.LocalDate;
 
 public record PlayerAveragesResponse(
-        String fName,
-        String lName,
-        String team,
-        Double minutes, // use double to handle potential null
+        Double minutes,
         Double pts,
         Double reb,
+        Double oreb,
+        Double dreb,
         Double ast,
-        Double fg,
+        Double fgm,
         Double fga,
         Double fgPer,
-        Double threeP,
-        Double threePa,
-        Double threePer,
-        Double ft,
+        Double fg3m,
+        Double fg3a,
+        Double fg3Per,
+        Double ftm,
         Double fta,
         Double ftPer,
-        Double steals,
-        Double blocks,
-        Double turnovers,
-        Double pf
+        Double stl,
+        Double blk,
+        Double blka,
+        Double tov,
+        Double pf,
+        Double pfD,
+        Double plusMinus
 ) {
 }
