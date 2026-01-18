@@ -7,13 +7,10 @@ GET http://localhost:8080/games/22500420
 GET http://localhost:8080/games/find_player_id?first=lebron&last=james
 
 ###
-DELETE http://localhost:8080/stats/8
+GET http://localhost:8080/games/top?stat=PTS
 
 ###
-GET http://localhost:8080/stats/top?stat=PTS
-
-###
-GET http://localhost:8080/stats/search?first=lebron&last=james
+GET http://localhost:8080/games/search?first=lebron&last=james
 
 ###
 GET http://localhost:8080/games/averages?first=lebron&last=james
@@ -22,10 +19,10 @@ GET http://localhost:8080/games/averages?first=lebron&last=james
 GET http://localhost:8080/games/averages/recent?first=lebron&last=james&n=5
 
 ###
-GET http://localhost:8080/stats/trends/range?first=lebron&last=james&from=2024-03-12&to=2025-12-20&stat=REB
+GET http://localhost:8080/games/trends/range?first=lebron&last=james&from=2024-03-12&to=2025-12-20&stat=REB
 
 ###
-GET http://localhost:8080/stats/trends/recent?first=lebron&last=james&stat=REB&games=2
+GET http://localhost:8080/games/trends/recent?first=lebron&last=james&stat=PTS&games=10
 
 ###
 GET http://localhost:8080/games/heat_check?playerId=2544

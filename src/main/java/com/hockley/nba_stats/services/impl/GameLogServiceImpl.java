@@ -6,7 +6,6 @@ import com.hockley.nba_stats.domain.entities.*;
 import com.hockley.nba_stats.exceptions.GameLogNotFoundException;
 import com.hockley.nba_stats.exceptions.PlayerNotFoundException;
 import com.hockley.nba_stats.repositories.GameLogRepository;
-import com.hockley.nba_stats.repositories.PlayerGameStatRepository;
 import com.hockley.nba_stats.repositories.PlayerRepository;
 import com.hockley.nba_stats.services.GameLogService;
 import jakarta.transaction.Transactional;

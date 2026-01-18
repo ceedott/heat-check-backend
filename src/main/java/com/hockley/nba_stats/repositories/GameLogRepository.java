@@ -2,7 +2,6 @@ package com.hockley.nba_stats.repositories;
 
 import com.hockley.nba_stats.domain.dto.PlayerAveragesResponse;
 import com.hockley.nba_stats.domain.entities.GameLog;
-import com.hockley.nba_stats.domain.entities.PlayerGameStat;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

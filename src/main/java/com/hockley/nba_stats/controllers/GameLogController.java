@@ -3,19 +3,12 @@ package com.hockley.nba_stats.controllers;
 import com.hockley.nba_stats.domain.dto.*;
 import com.hockley.nba_stats.domain.entities.*;
 import com.hockley.nba_stats.mappers.GameLogMapper;
-import com.hockley.nba_stats.mappers.PlayerGameStatMapper;
 import com.hockley.nba_stats.services.GameLogService;
-import com.hockley.nba_stats.services.PlayerGameStatService;
-import com.hockley.nba_stats.services.ingestion.IngestionResult;
-import com.hockley.nba_stats.services.ingestion.PlayerGameStatCsvIngestionService;
-import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -111,6 +104,7 @@ public class GameLogController {
     }
 
     // implement pagination?
+    // be wary of rolling averages. the 1st game will only have sample size of 1.
     @GetMapping("/trends/recent")
     public ResponseEntity<List<RollingAverage>> getPlayerRollingAveragesLastNGames(
             @RequestParam String first,

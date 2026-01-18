@@ -4,7 +4,6 @@ import com.hockley.nba_stats.domain.dto.PlayerAveragesResponse;
 import com.hockley.nba_stats.domain.dto.RollingAverage;
 import com.hockley.nba_stats.domain.entities.GameLog;
 import com.hockley.nba_stats.domain.entities.HeatLevel;
-import com.hockley.nba_stats.domain.entities.PlayerGameStat;
 import com.hockley.nba_stats.domain.entities.StatType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -2,6 +2,7 @@ package com.hockley.nba_stats.repository;
 
 import com.hockley.nba_stats.domain.dto.PlayerAveragesResponse;
 import com.hockley.nba_stats.domain.entities.GameLog;
+import com.hockley.nba_stats.exceptions.GameLogNotFoundException;
 import com.hockley.nba_stats.repositories.GameLogRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,13 +49,10 @@ public class GameLogRepositoryTest {
     void testGetPlayerAverages() {
         Long playerId = 1630173L;
 
-        List<PlayerAveragesResponse> averages = gameLogRepository.getPlayerAverages(playerId);
+        PlayerAveragesResponse averages = gameLogRepository.getPlayerAverages(playerId)
+                .orElseThrow(() -> new GameLogNotFoundException(playerId));
 
-        assertFalse(averages.isEmpty());
-
-        for (PlayerAveragesResponse response : averages) {
-            System.out.println(response.toString());
-        }
+        System.out.println(averages.toString());
 
     }
 
