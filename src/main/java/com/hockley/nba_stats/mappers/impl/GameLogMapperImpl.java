@@ -5,6 +5,7 @@ import com.hockley.nba_stats.domain.dto.PlayerGameStatRequest;
 import com.hockley.nba_stats.domain.dto.PlayerGameStatResponse;
 import com.hockley.nba_stats.domain.entities.*;
 import com.hockley.nba_stats.exceptions.PlayerGameStatNotFoundException;
+import com.hockley.nba_stats.exceptions.PlayerNotFoundException;
 import com.hockley.nba_stats.mappers.GameLogMapper;
 import com.hockley.nba_stats.repositories.GameLogRepository;
 import com.hockley.nba_stats.repositories.GameRepository;
@@ -30,10 +31,10 @@ public class GameLogMapperImpl implements GameLogMapper {
 
         Player player = playerRepository
                 .findById(gameLog.getPlayerId())
-                .orElseThrow(() -> new PlayerGameStatNotFoundException(gameLog.getPlayerId()));
+                .orElseThrow(() -> new PlayerNotFoundException(gameLog.getPlayerId()));
 
-        Team team = teamRepository.findById(gameLog.getTeamId()).orElseThrow();
-        Team oppTeam = teamRepository.findById(gameLog.getOpponentTeamId()).orElseThrow();
+        Team team = teamRepository.findById(gameLog.getTeamId()).orElseThrow(); //FIXME
+        Team oppTeam = teamRepository.findById(gameLog.getOpponentTeamId()).orElseThrow(); //FIXME
 
         return new GameLogResponse(
                 player.getFullName(),

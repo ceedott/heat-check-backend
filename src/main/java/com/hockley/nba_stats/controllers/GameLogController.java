@@ -1,9 +1,7 @@
 package com.hockley.nba_stats.controllers;
 
 import com.hockley.nba_stats.domain.dto.*;
-import com.hockley.nba_stats.domain.entities.GameLog;
-import com.hockley.nba_stats.domain.entities.PlayerGameStat;
-import com.hockley.nba_stats.domain.entities.StatType;
+import com.hockley.nba_stats.domain.entities.*;
 import com.hockley.nba_stats.mappers.GameLogMapper;
 import com.hockley.nba_stats.mappers.PlayerGameStatMapper;
 import com.hockley.nba_stats.services.GameLogService;
@@ -23,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/stats")
+@RequestMapping("/games")
 public class GameLogController {
     private final GameLogMapper gameLogMapper;
     private final GameLogService gameLogService;
@@ -50,7 +48,7 @@ public class GameLogController {
         );
     }
 
-    @GetMapping("/games/{game_id}")
+    @GetMapping("/game/{game_id}")
     public ResponseEntity<Page<GameLogResponse>> getGameLogsByGameId(
             @PathVariable("game_id") Long gameId
     ) {
@@ -70,7 +68,7 @@ public class GameLogController {
 
     @GetMapping("/search")
     public ResponseEntity<Page<GameLogResponse>> getByfNameAndlName(
-            @RequestParam String first,
+            @RequestParam String first, // first and last sent as query parameters in endpoint
             @RequestParam String last,
             @PageableDefault(size = 10) Pageable pageable
     ) {
@@ -80,11 +78,20 @@ public class GameLogController {
 
     // /stats/averages?first=Lebron&last=James
     @GetMapping("/averages")
-    public ResponseEntity<List<PlayerAveragesResponse>> getPlayerAverages(
-            @RequestParam String first,
+    public ResponseEntity<PlayerAveragesResponse> getPlayerAverages(
+            @RequestParam String first, // query params
             @RequestParam String last
     ) {
         return ResponseEntity.ok(gameLogService.getPlayerAverages(first, last));
+    }
+
+    @GetMapping("/averages/recent")
+    public ResponseEntity<PlayerAveragesResponse> getPlayerAveragesLastNGames(
+            @RequestParam String first,
+            @RequestParam String last,
+            @RequestParam int n
+    ) {
+        return ResponseEntity.ok(gameLogService.getPlayerAveragesLastNGames(first, last, n));
     }
 
     // implement pagination?
@@ -112,10 +119,46 @@ public class GameLogController {
             @RequestParam int games,
             @RequestParam(defaultValue = "5") int window
     ) {
-        int windowValid = Math.max(1, Math.min(window, 10));
-        int gamesValid = Math.max(1, Math.min(games, 15));
+        int windowValid = Math.max(1, Math.min(window, 10)); // max window size is 10
+        int gamesValid = Math.max(1, Math.min(games, 15)); // max # games is 15
 
         List<RollingAverage> rollingAverages = gameLogService.getPlayerRollingAverageLastNGames(first, last, stat, gamesValid, windowValid);
         return ResponseEntity.ok(rollingAverages);
     }
+
+    @GetMapping("/search/matchups")
+    public ResponseEntity<List<GameLogResponse>> getMatchupsVersusTeam() {
+        return null;
+    }
+
+    @GetMapping("/search/matchups/averages")
+    public ResponseEntity<PlayerAveragesResponse> getMatchupAveragesVersusTeam() {
+        return null;
+    }
+
+    // not a client interactable endpoint so going to send player id instead of name as param
+    @GetMapping("/heat_check")
+    public ResponseEntity<HeatLevel> heatCheck(
+            @RequestParam long playerId
+    ) {
+        // heat check based on last 5 games
+        return ResponseEntity.ok(gameLogService.performHeatCheck(playerId));
+    }
+
+    //helper endpoint to find player id
+    @GetMapping
+    @RequestMapping("/find_player_id")
+    public ResponseEntity<Long> getPlayerIdFromFirstAndLast(
+            @RequestParam String first,
+            @RequestParam String last
+    ) {
+        return ResponseEntity.ok(gameLogService.getPlayerIdFromFirstAndLast(first, last));
+    }
+
+    // get player's most recent game
+
+    // see other team's past 5 games
+
+    // get averages of similar players/position vs next matchup
+
 }

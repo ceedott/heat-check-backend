@@ -1,13 +1,13 @@
 package com.hockley.nba_stats.domain.entities;
 
-public enum StatType {
-    PTS("pts"),
-    REB("reb"),
-    AST("ast");
+public enum HeatLevel {
+    HOT("hot"),
+    COLD("cold"),
+    NEUTRAL("neutral");
 
     private final String column;
 
-    StatType(String column) {
+    HeatLevel(String column) {
         this.column = column;
     }
 
