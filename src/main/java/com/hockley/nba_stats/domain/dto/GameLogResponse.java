@@ -3,6 +3,7 @@ package com.hockley.nba_stats.domain.dto;
 import java.time.LocalDate;
 
 public record GameLogResponse(
+        Long id,
         String name, // in another table, might not even need player's name
         LocalDate gameDate,
         String team, // in another table

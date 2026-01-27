@@ -33,6 +33,7 @@ public class GameLogMapperImpl implements GameLogMapper {
         Team oppTeam = teamRepository.findById(gameLog.getOpponentTeamId()).orElseThrow(); //FIXME
 
         return new GameLogResponse(
+                gameLog.getId(),
                 player.getFullName(),
                 gameLog.getGameDate(),
                 team.getAbbrev(),

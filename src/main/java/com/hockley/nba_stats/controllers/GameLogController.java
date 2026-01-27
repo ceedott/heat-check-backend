@@ -63,13 +63,12 @@ public class GameLogController {
     public ResponseEntity<Page<GameLogResponse>> getByfNameAndlName(
             @RequestParam String first, // first and last sent as query parameters in endpoint
             @RequestParam String last,
-            @PageableDefault(size = 10) Pageable pageable
+            @PageableDefault(size = 10, page = 0) Pageable pageable
     ) {
         Page<GameLogResponse> response = gameLogService.getByfNameAndlName(first, last, pageable).map(gameLogMapper::toDto);
         return ResponseEntity.ok(response);
     }
 
-    // /stats/averages?first=Lebron&last=James
     @GetMapping("/averages")
     public ResponseEntity<PlayerAveragesResponse> getPlayerAverages(
             @RequestParam String first, // query params

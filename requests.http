@@ -1,4 +1,4 @@
-GET http://localhost:8080/games
+GET http://localhost:8080/game
 
 ###
 GET http://localhost:8080/games/22500420
@@ -10,7 +10,7 @@ GET http://localhost:8080/games/find_player_id?first=lebron&last=james
 GET http://localhost:8080/games/top?stat=PTS
 
 ###
-GET http://localhost:8080/games/search?first=lebron&last=james
+GET http://localhost:8080/games/search?first=lebron&last=james&page=1
 
 ###
 GET http://localhost:8080/games/averages?first=lebron&last=james
