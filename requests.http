@@ -25,4 +25,4 @@ GET http://localhost:8080/games/trends/range?first=lebron&last=james&from=2024-0
 GET http://localhost:8080/games/trends/recent?first=lebron&last=james&stat=PTS&games=10
 
 ###
-GET http://localhost:8080/games/heat_check?playerId=2544
+GET http://localhost:8080/games/heat_check?first=lebron&last=james

@@ -113,7 +113,7 @@ public class GameLogController {
             @RequestParam(defaultValue = "5") int window
     ) {
         int windowValid = Math.max(1, Math.min(window, 10)); // max window size is 10
-        int gamesValid = Math.max(1, Math.min(games, 15)); // max # games is 15
+        int gamesValid = Math.max(1, Math.min(games, 20)); // max # games is 20
 
         List<RollingAverage> rollingAverages = gameLogService.getPlayerRollingAverageLastNGames(first, last, stat, gamesValid, windowValid);
         return ResponseEntity.ok(rollingAverages);
@@ -132,10 +132,11 @@ public class GameLogController {
     // not a client interactable endpoint so going to send player id instead of name as param
     @GetMapping("/heat_check")
     public ResponseEntity<HeatLevel> heatCheck(
-            @RequestParam long playerId
+            @RequestParam String first,
+            @RequestParam String last
     ) {
         // heat check based on last 5 games
-        return ResponseEntity.ok(gameLogService.performHeatCheck(playerId));
+        return ResponseEntity.ok(gameLogService.performHeatCheck(first, last));
     }
 
     //helper endpoint to find player id

@@ -21,6 +21,6 @@ public interface GameLogService {
     PlayerAveragesResponse getPlayerAveragesLastNGames(String first, String last, int n);
     List<RollingAverage> getPlayerRollingAverageByDate(String first, String last, LocalDate from, LocalDate to, StatType statType, int window);
     List<RollingAverage> getPlayerRollingAverageLastNGames(String first, String last, StatType statType, int games, int window);
-    HeatLevel performHeatCheck(long playerId);
+    HeatLevel performHeatCheck(String first, String last);
     Long getPlayerIdFromFirstAndLast(String first, String last);
 }

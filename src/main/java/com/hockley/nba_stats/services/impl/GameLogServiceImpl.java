@@ -156,7 +156,7 @@ public class GameLogServiceImpl implements GameLogService {
         }
 
         // reverse so we process oldest to newest
-        Collections.reverse(games);
+        //Collections.reverse(games);
 
         return computeRollingAverage(games, statType, window);
 
@@ -164,9 +164,9 @@ public class GameLogServiceImpl implements GameLogService {
 
     // calculate heat level of player by comparing season average to their recent average of last 5 games
     @Override
-    public HeatLevel performHeatCheck(long playerId) {
-        Player player = playerRepository.findById(playerId)
-                .orElseThrow(() -> new PlayerNotFoundException(playerId));
+    public HeatLevel performHeatCheck(String first, String last) {
+        Player player = playerRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(first, last)
+                .orElseThrow(() -> new PlayerNotFoundException(first, last));
 
         PlayerAveragesResponse recent = getPlayerAveragesLastNGames(player.getFirstName(), player.getLastName(), 5);
         PlayerAveragesResponse season = getPlayerAverages(player.getFirstName(), player.getLastName());
@@ -210,6 +210,9 @@ public class GameLogServiceImpl implements GameLogService {
         List<RollingAverage> rollingAverages = new ArrayList<>();
         Deque<Integer> q = new ArrayDeque<>();
         int runningSum = 0;
+
+        // reverse games, process oldest games first
+        Collections.reverse(games);
 
         for (GameLog game : games) {
             int stat = switch (statType) {
